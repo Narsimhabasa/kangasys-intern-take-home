@@ -1,3 +1,5 @@
+<img src="./assets/kangasys-logo.png" alt="KangaSys logo" width="220" />
+
 # KangaSys
 
 KangaSys builds software that helps facility and operations teams make sense of the physical world — ingesting data from thousands of connected devices (sensors, meters, equipment) across buildings and sites, and turning it into something people can actually act on: is a device online, is a reading within a safe range, has something gone wrong that needs attention right now.
