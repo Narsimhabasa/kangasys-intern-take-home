@@ -1,6 +1,5 @@
 # KangaSys — Software Engineering Intern Take-Home Assignment
 
-**Candidate:** Neethu R Gowda
 **Duration:** 3 days from receipt
 **Submission:** Link to a public (or invite-only) Git repository with your code, a `README.md` explaining how to run it, and any notes on decisions/tradeoffs you made.
 
