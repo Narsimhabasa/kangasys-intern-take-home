@@ -12,6 +12,6 @@ This repo contains a take-home assignment for a Software Engineering Intern cand
 
 👉 **[Read the Problem Statement](./Problem_Statement.md)**
 
-New to Git/GitHub? Start with **[Setup Guidelines](./SetupGuidelines.md)** for step-by-step instructions on cloning, branching, committing, and submitting your work.
+New to Git/GitHub? Start with **[Setup Guidelines](./SetupGuidelines.md)** for step-by-step instructions on forking this repo, committing your work, and opening a Pull Request to submit it.
 
 Sample data illustrating what device/reading data looks like is in [`sample-data/`](./sample-data).

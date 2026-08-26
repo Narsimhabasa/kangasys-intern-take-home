@@ -1,7 +1,7 @@
 # KangaSys — Software Engineering Intern Take-Home Assignment
 
 **Duration:** 3 days from receipt
-**Submission:** Link to a public (or invite-only) Git repository with your code, a `README.md` explaining how to run it, and any notes on decisions/tradeoffs you made.
+**Submission:** Fork this repo, do your work in your fork, and open a Pull Request back to us when you're done — see [SetupGuidelines.md](./SetupGuidelines.md) for step-by-step instructions. Include a `README.md` explaining how to run it, and any notes on decisions/tradeoffs you made.
 
 ---
 
@@ -94,7 +94,8 @@ Feel free to commit these prompt/instruction files alongside your code (a `.prom
 
 ## Submission Checklist
 
-- [ ] Source code in a Git repo (with sensible commit history — we like seeing how you got there, not just the final state)
+- [ ] Source code pushed to your fork (with sensible commit history — we like seeing how you got there, not just the final state)
+- [ ] Pull Request opened against `Rohanmrao/kangasys-intern-take-home` `master`
 - [ ] `README.md` with setup/run instructions
 - [ ] Brief notes on design decisions and what you'd do differently with more time
 - [ ] Tests included and passing
