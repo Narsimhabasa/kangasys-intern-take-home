@@ -1,6 +1,6 @@
 # KangaSys — Software Engineering Intern Take-Home Assignment
 
-**Duration:** 3 days from receipt
+**Duration:** 2 days from receipt
 **Submission:** Fork this repo, do your work in your fork, and open a Pull Request back to us when you're done — see [SetupGuidelines.md](./SetupGuidelines.md) for step-by-step instructions. Include a `README.md` explaining how to run it, and any notes on decisions/tradeoffs you made.
 
 ---
