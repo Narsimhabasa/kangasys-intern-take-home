@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KangaSys Device Monitoring</title>
+
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/app.js" defer></script>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <img
+                src="/assets/kangasys-logo.png"
+                alt="KangaSys logo"
+                class="logo"
+            >
+
+            <div>
+                <p class="eyebrow">KangaSys</p>
+                <h1>Device Monitoring Service</h1>
+            </div>
+        </div>
+
+        <button id="refresh-button" type="button">
+            Refresh Dashboard
+        </button>
+    </header>
+
+    <main class="dashboard">
+        <section class="summary-grid" aria-label="Monitoring summary">
+            <article class="summary-card">
+                <span>Total Devices</span>
+                <strong id="device-count">0</strong>
+            </article>
+
+            <article class="summary-card">
+                <span>Active Devices</span>
+                <strong id="active-device-count">0</strong>
+            </article>
+
+            <article class="summary-card alert-summary">
+                <span>Active Alerts</span>
+                <strong id="alert-count">0</strong>
+            </article>
+        </section>
+
+        <div
+            id="message"
+            class="message"
+            role="status"
+            hidden
+        ></div>
+
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow">Inventory</p>
+                    <h2>Devices</h2>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Unit</th>
+                            <th>Normal Range</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="devices-body">
+                        <tr>
+                            <td colspan="5" class="empty-state">
+                                Loading devices...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="panel">
+                <div class="panel-header">
+                    <div>
+                        <p class="eyebrow">Telemetry</p>
+                        <h2>Recent Readings</h2>
+                    </div>
+                </div>
+
+                <form id="reading-form" class="reading-form">
+                    <label for="device-select">
+                        Device
+
+                        <select id="device-select" required>
+                            <option value="">Select a device</option>
+                        </select>
+                    </label>
+
+                    <label for="reading-value">
+                        Reading value
+
+                        <input
+                            id="reading-value"
+                            type="number"
+                            step="any"
+                            placeholder="Example: 4.5"
+                            required
+                        >
+                    </label>
+
+                    <div class="unit-display">
+                        Unit
+                        <strong id="selected-unit">—</strong>
+                    </div>
+
+                    <button type="submit">
+                        Submit Reading
+                    </button>
+                </form>
+
+                <p
+                    id="selected-device-details"
+                    class="device-details"
+                >
+                    Select a device to view its recent readings.
+                </p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Value</th>
+                                <th>Unit</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="readings-body">
+                            <tr>
+                                <td colspan="3" class="empty-state">
+                                    No device selected.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article class="panel alerts-panel">
+                <div class="panel-header">
+                    <div>
+                        <p class="eyebrow">Attention Required</p>
+                        <h2>Active Alerts</h2>
+                    </div>
+                </div>
+
+                <div id="alerts-list" class="alerts-list">
+                    <p class="empty-state">
+                        Loading active alerts...
+                    </p>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        Device Monitoring Service · FastAPI · SQLite
+    </footer>
+</body>
+</html>
