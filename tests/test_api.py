@@ -194,3 +194,42 @@ def test_readings_can_be_filtered_by_start_time(
     assert response.status_code == 200
     assert len(response.json()) == 1
     assert response.json()[0]["value"] == 5.0
+
+
+def test_reading_timestamp_is_returned_as_utc(
+    client: TestClient,
+) -> None:
+    device = create_device(client)
+
+    response = client.post(
+        f"/api/devices/{device['id']}/readings",
+        json={
+            "value": 4.0,
+            "unit": "C",
+            "timestamp": "2026-08-28T12:00:00+05:30",
+        },
+    )
+
+    assert response.status_code == 201
+    assert response.json()["reading"]["timestamp"] == (
+        "2026-08-28T06:30:00Z"
+    )
+
+
+def test_reading_filter_requires_timezone(
+    client: TestClient,
+) -> None:
+    device = create_device(client)
+
+    response = client.get(
+        f"/api/devices/{device['id']}/readings",
+        params={
+            "start_time": "2026-08-28T00:00:00",
+            "end_time": "2026-08-29T00:00:00Z",
+        },
+    )
+
+    assert response.status_code == 400
+    assert response.json()["detail"] == (
+        "start_time must include a timezone"
+    )

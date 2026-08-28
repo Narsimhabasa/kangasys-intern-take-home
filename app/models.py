@@ -1,6 +1,9 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+from uuid import uuid4
+
+IST = timezone(timedelta(hours=5, minutes=30))
 from uuid import uuid4
 
 from sqlalchemy import (
@@ -12,15 +15,49 @@ from sqlalchemy import (
     String,
     Text,
 )
+from sqlalchemy.engine import Dialect
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
+from sqlalchemy.types import TypeDecorator
 from app.database import Base
 
 
-def utc_now() -> datetime:
-    """Return the current time in UTC."""
 
+
+
+
+def utc_now() -> datetime:
     return datetime.now(timezone.utc)
+class UTCDateTime(TypeDecorator[datetime]):
+    """Store UTC as naive SQLite values and restore UTC on reads."""
+
+    impl = DateTime
+    cache_ok = True
+
+    def process_bind_param(
+        self,
+        value: datetime | None,
+        _dialect: Dialect,
+    ) -> datetime | None:
+        if value is None:
+            return None
+
+        if value.tzinfo is None or value.utcoffset() is None:
+            raise ValueError("datetime must include a timezone")
+
+        return value.astimezone(timezone.utc).replace(tzinfo=None)
+
+    def process_result_value(
+        self,
+        value: datetime | None,
+        _dialect: Dialect,
+    ) -> datetime | None:
+        if value is None:
+            return None
+
+        if value.tzinfo is None or value.utcoffset() is None:
+            return value.replace(tzinfo=timezone.utc)
+
+        return value.astimezone(timezone.utc)
 
 
 class Device(Base):
@@ -73,7 +110,7 @@ class Device(Base):
     normal_min: Mapped[float | None] = mapped_column(Float, nullable=True)
     normal_max: Mapped[float | None] = mapped_column(Float, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
+        UTCDateTime(),
         nullable=False,
         default=utc_now,
     )
@@ -102,13 +139,13 @@ class Reading(Base):
     value: Mapped[float] = mapped_column(Float, nullable=False)
     unit: Mapped[str] = mapped_column(String(20), nullable=False)
     timestamp: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
+        UTCDateTime(),
         nullable=False,
         default=utc_now,
         index=True,
     )
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
+        UTCDateTime(),
         nullable=False,
         default=utc_now,
     )
@@ -139,7 +176,7 @@ class Alert(Base):
     trigger_value: Mapped[float] = mapped_column(Float, nullable=False)
     unit: Mapped[str] = mapped_column(String(20), nullable=False)
     timestamp: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
+        UTCDateTime(),
         nullable=False,
         default=utc_now,
         index=True,
@@ -152,7 +189,7 @@ class Alert(Base):
         index=True,
     )
     resolved_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True),
+        UTCDateTime(),
         nullable=True,
     )
 

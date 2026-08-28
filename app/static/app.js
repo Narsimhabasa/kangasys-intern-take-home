@@ -69,7 +69,11 @@ function formatDate(timestamp) {
         return "—";
     }
 
-    return new Date(timestamp).toLocaleString();
+    const isoStr = timestamp.endsWith("Z") || timestamp.includes("+")
+        ? timestamp
+        : timestamp + "Z";
+
+    return new Date(isoStr).toLocaleString();
 }
 
 function formatRange(device) {

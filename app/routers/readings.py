@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi import status as http_status
@@ -21,6 +21,22 @@ router = APIRouter(
     prefix="/api/devices/{device_id}/readings",
     tags=["readings"],
 )
+def normalize_filter_time(
+    value: datetime | None,
+    parameter_name: str,
+) -> datetime | None:
+    """Require a timezone and normalize a filter value to UTC."""
+
+    if value is None:
+        return None
+
+    if value.tzinfo is None or value.utcoffset() is None:
+        raise HTTPException(
+            status_code=http_status.HTTP_400_BAD_REQUEST,
+            detail=f"{parameter_name} must include a timezone",
+        )
+
+    return value.astimezone(timezone.utc)
 
 
 @router.post(
@@ -116,15 +132,18 @@ def list_readings(
 
     get_device_or_404(device_id, database)
 
+    start_time = normalize_filter_time(start_time, "start_time")
+    end_time = normalize_filter_time(end_time, "end_time")
+
     if (
-        start_time is not None
-        and end_time is not None
-        and start_time > end_time
-    ):
-        raise HTTPException(
-            status_code=http_status.HTTP_400_BAD_REQUEST,
-            detail="start_time must be before end_time",
-        )
+            start_time is not None
+                and end_time is not None
+                and start_time > end_time
+            ):
+                raise HTTPException(
+                    status_code=http_status.HTTP_400_BAD_REQUEST,
+                    detail="start_time must be before end_time",
+                )
 
     query = select(Reading).where(Reading.device_id == device_id)
 

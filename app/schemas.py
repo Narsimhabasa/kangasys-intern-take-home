@@ -1,7 +1,9 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import Literal
+def utc_now() -> datetime:
+    return datetime.now(timezone.utc)
 
 from pydantic import (
     BaseModel,
