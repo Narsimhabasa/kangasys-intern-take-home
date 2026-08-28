@@ -93,7 +93,7 @@ kangasys-intern-take-home/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Narsimhabasa/kangasys-intern-take-home.git
+git clone --branch feature/device-monitoring-service https://github.com/Narsimhabasa/kangasys-intern-take-home.git
 cd kangasys-intern-take-home
 ```
 
