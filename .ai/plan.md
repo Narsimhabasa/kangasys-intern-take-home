@@ -16,16 +16,16 @@ detecting abnormal values, and resolving alerts.
 
 ## Core Features
 
-- [ ] Create, list, update, and delete devices
-- [ ] Submit readings for active devices
-- [ ] Filter readings by start and end time
-- [ ] Detect readings outside a device's normal range
-- [ ] Create alerts automatically
-- [ ] List unresolved alerts
-- [ ] Resolve an alert
-- [ ] Display devices, readings, and alerts in a single-page UI
-- [ ] Test important business rules
-- [ ] Document setup instructions and design decisions
+- [x] Create, list, update, and delete devices
+- [x] Submit readings for active devices
+- [x] Filter readings by start and end time
+- [x] Detect readings outside a device's normal range
+- [x] Create alerts automatically
+- [x] List unresolved alerts
+- [x] Resolve an alert
+- [x] Display devices, readings, and alerts in a single-page UI
+- [x] Test important business rules
+- [x] Document setup instructions and design decisions
 
 ## Design Assumptions
 

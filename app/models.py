@@ -1,9 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone, timedelta
-from uuid import uuid4
-
-IST = timezone(timedelta(hours=5, minutes=30))
+from datetime import datetime, timezone
 from uuid import uuid4
 
 from sqlalchemy import (
@@ -18,15 +15,16 @@ from sqlalchemy import (
 from sqlalchemy.engine import Dialect
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.types import TypeDecorator
+
 from app.database import Base
 
 
-
-
-
-
 def utc_now() -> datetime:
+    """Return the current time in UTC."""
+
     return datetime.now(timezone.utc)
+
+
 class UTCDateTime(TypeDecorator[datetime]):
     """Store UTC as naive SQLite values and restore UTC on reads."""
 

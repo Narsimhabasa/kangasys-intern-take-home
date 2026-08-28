@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from typing import Literal
-def utc_now() -> datetime:
-    return datetime.now(timezone.utc)
 
 from pydantic import (
     BaseModel,
@@ -26,6 +24,8 @@ DeviceStatus = Literal["active", "inactive"]
 
 
 def utc_now() -> datetime:
+    """Return the current time in UTC."""
+
     return datetime.now(timezone.utc)
 
 
@@ -145,4 +145,4 @@ class ReadingSubmissionResponse(BaseModel):
 
 
 class MessageResponse(BaseModel):
-    message: str 
+    message: str

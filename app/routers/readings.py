@@ -21,6 +21,8 @@ router = APIRouter(
     prefix="/api/devices/{device_id}/readings",
     tags=["readings"],
 )
+
+
 def normalize_filter_time(
     value: datetime | None,
     parameter_name: str,
@@ -136,14 +138,14 @@ def list_readings(
     end_time = normalize_filter_time(end_time, "end_time")
 
     if (
-            start_time is not None
-                and end_time is not None
-                and start_time > end_time
-            ):
-                raise HTTPException(
-                    status_code=http_status.HTTP_400_BAD_REQUEST,
-                    detail="start_time must be before end_time",
-                )
+        start_time is not None
+        and end_time is not None
+        and start_time > end_time
+    ):
+        raise HTTPException(
+            status_code=http_status.HTTP_400_BAD_REQUEST,
+            detail="start_time must be before end_time",
+        )
 
     query = select(Reading).where(Reading.device_id == device_id)
 

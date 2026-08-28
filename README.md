@@ -188,11 +188,12 @@ The test suite covers:
 - Inactive-device business rules
 - Unit validation
 - Reading time-range filtering
+- Timezone-aware reading filters, including rejection of timestamps without timezone information
 
 Current result:
 
 ```text
-12 passed
+14 passed
 ```
 
 ## Design Decisions
