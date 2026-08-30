@@ -62,6 +62,7 @@ Interactive API documentation is also available through FastAPI Swagger UI.
 ```text
 kangasys-intern-take-home/
 ├── .ai/
+│   ├── notes.md
 │   └── plan.md
 ├── app/
 │   ├── routers/
@@ -262,11 +263,7 @@ Given more time, I would add:
 
 AI tools were used iteratively to help with planning, code structure, test-case suggestions, and debugging. The implementation was divided into separate commits instead of being generated as a single one-shot solution.
 
-The initial implementation plan and assumptions are recorded in:
-
-```text
-.ai/plan.md
-```
+The initial implementation plan and assumptions are recorded in `.ai/plan.md`, and corrections made during development are documented in `.ai/notes.md`.
 
 One early design idea was to configure a single threshold for each device type. After reviewing the sample data, I noticed that two temperature sensors could require different normal ranges. I therefore changed the design to store thresholds per device.
 
